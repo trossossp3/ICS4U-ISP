@@ -68,20 +68,15 @@ model.load_weights('model.h5')
 
 while True:
 
-    f = open('input.txt', 'r+')
-    line = f.readline()
-    f.close()
-    if(line[:2] != "**" and line!=''):
-        # format your input for the neural net
-        testArr = convert_text_to_index_array(line)
-        input = tokenizer.sequences_to_matrix([testArr], mode='binary')
-           # predict which bucket your input belongs in
-        if (input.ndim == 1):
-            input = np.array([input])
-        pred = model.predict(input)
-        # and print it for the humons
-        f = open("input.txt",'w+')
-        dog =("***"+"%s sentiment; %f%% confidence" %
+    # format your input for the neural net
+    testArr = convert_text_to_index_array("sad")
+    input = tokenizer.sequences_to_matrix([testArr], mode='binary')
+    # predict which bucket your input belongs in
+    if (input.ndim == 1):
+        input = np.array([input])
+    pred = model.predict(input)
+    # and print it for the humons
+    
+    print("***"+"%s sentiment; %f%% confidence" %
             (labels[np.argmax(pred)], pred[0][np.argmax(pred)] * 100))
-        f.write(dog)
-        f.close()
+    
