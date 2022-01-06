@@ -2,7 +2,7 @@ data.csv
 .DS_Store
 node_modules
 /dist
-/PlateReconition
+
 training.csv
 # local env files
 .env.local
